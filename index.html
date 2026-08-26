@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Veterans Landing, Veteran Owned Housing in Detroit</title>
+<meta name="description" content="Veterans Landing is a veteran-owned housing community in Detroit offering safe, stable, affordable apartments plus on site resources, training, and career support. Two communities: Joy Road and Iris Manor.">
+<meta name="theme-color" content="#f7f9fc">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Veterans Landing, A Veteran Owned Community">
+<meta property="og:description" content="A place to live. A community to belong. A future to build.">
+<meta property="og:image" content="assets/img/iris-manor-building.jpg">
+
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<!-- ============================= ICON SPRITE ============================= -->
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
+  <symbol id="i-wifi" viewBox="0 0 24 24"><path fill="currentColor" d="M12 19.5a1.75 1.75 0 1 0 0-3.5 1.75 1.75 0 0 0 0 3.5Zm-4.2-4.6 1.6 1.5a3.7 3.7 0 0 1 5.2 0l1.6-1.5a6 6 0 0 0-8.4 0Zm-3-3 1.6 1.5a8 8 0 0 1 11.2 0l1.6-1.5a10.2 10.2 0 0 0-14.4 0Zm-3-3 1.6 1.5a12.2 12.2 0 0 1 17.2 0L23.2 8.9a14.5 14.5 0 0 0-20.4 0Z"/></symbol>
+  <symbol id="i-appliance" viewBox="0 0 24 24"><path fill="currentColor" d="M6 2h12a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2Zm0 2v5h12V4H6Zm0 7v9h12v-9H6Zm2-5.5h2v2H8v-2Zm4 0h2v2h-2v-2Zm-2 8.25a2.75 2.75 0 1 1 0 5.5 2.75 2.75 0 0 1 0-5.5Z"/></symbol>
+  <symbol id="i-laundry" viewBox="0 0 24 24"><path fill="currentColor" d="M5 2h14a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2Zm0 2v2h14V4H5Zm11 .75a1 1 0 1 0 0 2 1 1 0 0 0 0-2Zm-4 3.5a6 6 0 1 0 0 12 6 6 0 0 0 0-12Zm0 2a4 4 0 1 1 0 8 4 4 0 0 1 0-8Z"/></symbol>
+  <symbol id="i-people" viewBox="0 0 24 24"><path fill="currentColor" d="M9 11a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Zm7.5.5a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM9 12.5c-3.3 0-6 1.7-6 3.8V19h12v-2.7c0-2.1-2.7-3.8-6-3.8Zm7.5.5c-.9 0-1.7.1-2.4.4 1.2.9 1.9 2 1.9 3.4V19H22v-2.3c0-1.8-2.4-3.2-5.5-3.2Z"/></symbol>
+  <symbol id="i-shield" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2 4 5.2v6.1c0 5 3.4 9.6 8 10.7 4.6-1.1 8-5.7 8-10.7V5.2L12 2Zm0 4.6 1.5 3 3.3.5-2.4 2.3.6 3.3-3-1.6-3 1.6.6-3.3L7.2 10l3.3-.5 1.5-2.9Z"/></symbol>
+  <symbol id="i-handshake" viewBox="0 0 24 24"><path fill="currentColor" d="M12.6 5.3 10 7.7a1.9 1.9 0 0 0 0 2.7 1.9 1.9 0 0 0 2.7 0l1.7-1.7 4.5 4.2c.7.7.7 1.8 0 2.5-.5.5-1.3.6-2 .3l.1.6c0 .9-.7 1.6-1.6 1.6h-.5c0 .8-.7 1.5-1.5 1.5-.4 0-.8-.2-1.1-.4l-.5-.5c-.2.6-.8 1-1.5 1-.9 0-1.6-.7-1.6-1.6v-.2H8c-.9 0-1.6-.7-1.6-1.6L2.9 13a1.7 1.7 0 0 1 0-2.5l4.4-4.4a3.6 3.6 0 0 1 2.6-1.1h2.7Zm1.9-.5h3.1c1 0 1.9.4 2.6 1.1l2.2 2.2-3 3-4.9-4.6V4.8Z"/></symbol>
+  <symbol id="i-briefcase" viewBox="0 0 24 24"><path fill="currentColor" d="M9 4h6a2 2 0 0 1 2 2v1h3a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h3V6a2 2 0 0 1 2-2Zm0 3h6V6H9v1Zm-5 5.4V18h16v-5.6a24 24 0 0 1-8 1.4 24 24 0 0 1-8-1.4Z"/></symbol>
+  <symbol id="i-chart" viewBox="0 0 24 24"><path fill="currentColor" d="M3 20h18v2H3v-2Zm2-7h3v6H5v-6Zm5-4h3v10h-3V9Zm5-5h3v15h-3V4Z"/></symbol>
+  <symbol id="i-book" viewBox="0 0 24 24"><path fill="currentColor" d="M4 3h6a3 3 0 0 1 2 .8A3 3 0 0 1 14 3h6a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1h-5.5c-.7 0-1.3.3-1.7.8L12 21l-.8-1.2c-.4-.5-1-.8-1.7-.8H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1Zm1 2v12h4.5c.5 0 1 .1 1.5.3V6.6A1.6 1.6 0 0 0 9.5 5H5Zm14 0h-4.5A1.6 1.6 0 0 0 13 6.6v10.7c.5-.2 1-.3 1.5-.3H19V5Z"/></symbol>
+  <symbol id="i-monitor" viewBox="0 0 24 24"><path fill="currentColor" d="M3 4h18a1 1 0 0 1 1 1v11a1 1 0 0 1-1 1h-7v2h4v2H6v-2h4v-2H3a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1Zm1 2v9h16V6H4Z"/></symbol>
+  <symbol id="i-flag" viewBox="0 0 24 24"><path fill="currentColor" d="M5 2h2v20H5V2Zm3 1.5h11.5L17 8l2.5 4.5H8v-9Z"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2a7 7 0 0 1 7 7c0 5-7 13-7 13S5 14 5 9a7 7 0 0 1 7-7Zm0 4.5A2.5 2.5 0 1 0 12 11a2.5 2.5 0 0 0 0-5Z"/></symbol>
+  <symbol id="i-phone" viewBox="0 0 24 24"><path fill="currentColor" d="M6.6 10.8a15.5 15.5 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.2.4 2.4.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.4 0 .8-.2 1l-2.3 2.2Z"/></symbol>
+  <symbol id="i-mail" viewBox="0 0 24 24"><path fill="currentColor" d="M3 5h18a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1Zm1 2.4V17h16V7.4l-8 5.3-8-5.3ZM5.6 7 12 11.3 18.4 7H5.6Z"/></symbol>
+  <symbol id="i-globe" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm6.9 9h-3a15 15 0 0 0-1.3-5.7A8 8 0 0 1 18.9 11ZM12 4.2c.8 1.1 1.7 3.3 1.9 6.8h-3.8c.2-3.5 1.1-5.7 1.9-6.8ZM5.1 11a8 8 0 0 1 4.3-5.7A15 15 0 0 0 8.1 11h-3Zm0 2h3a15 15 0 0 0 1.3 5.7A8 8 0 0 1 5.1 13ZM12 19.8c-.8-1.1-1.7-3.3-1.9-6.8h3.8c-.2 3.5-1.1 5.7-1.9 6.8Zm2.6-1.1a15 15 0 0 0 1.3-5.7h3a8 8 0 0 1-4.3 5.7Z"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm0 2a8 8 0 1 1 0 16 8 8 0 0 1 0-16Zm-1 3h2v5.4l3.6 2.1-1 1.7L11 13.6V7Z"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path fill="currentColor" d="M13.2 5.2 11.8 6.6 16.2 11H4v2h12.2l-4.4 4.4 1.4 1.4L20 12l-6.8-6.8Z"/></symbol>
+  <symbol id="i-fb" viewBox="0 0 24 24"><path fill="currentColor" d="M13.5 22v-8h2.7l.4-3.1h-3.1V8.9c0-.9.25-1.5 1.55-1.5H16.7V4.6A22 22 0 0 0 14.3 4.5c-2.4 0-4 1.5-4 4.1v2.3H7.6V14h2.7v8h3.2Z"/></symbol>
+  <symbol id="i-ig" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 1.8.3 2.2.4.6.2 1 .5 1.4.9.4.4.7.8.9 1.4.2.4.3 1 .4 2.2.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.3 1.8-.4 2.2-.2.6-.5 1-.9 1.4-.4.4-.8.7-1.4.9-.4.2-1 .3-2.2.4-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.8-.3-2.2-.4a3.9 3.9 0 0 1-1.4-.9 3.9 3.9 0 0 1-.9-1.4c-.2-.4-.3-1-.4-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.9c.1-1.2.3-1.8.4-2.2.2-.6.5-1 .9-1.4.4-.4.8-.7 1.4-.9.4-.2 1-.3 2.2-.4C8.4 2.2 8.8 2.2 12 2.2Zm0 3.05A6.75 6.75 0 1 0 12 18.75 6.75 6.75 0 0 0 12 5.25Zm0 2.4a4.35 4.35 0 1 1 0 8.7 4.35 4.35 0 0 1 0-8.7Zm7.05-2.7a1.58 1.58 0 1 1-3.16 0 1.58 1.58 0 0 1 3.16 0Z"/></symbol>
+  <symbol id="i-li" viewBox="0 0 24 24"><path fill="currentColor" d="M6.94 8.5H3.56V21h3.38V8.5ZM5.25 3a1.96 1.96 0 1 0 0 3.92 1.96 1.96 0 0 0 0-3.92ZM21 14.1c0-3.5-1.87-5.13-4.36-5.13-2.01 0-2.91 1.1-3.41 1.88V8.5H9.85c.04.95 0 12.5 0 12.5h3.38v-6.98c0-.31.02-.62.11-.84.25-.62.81-1.26 1.76-1.26 1.24 0 1.74.94 1.74 2.33V21H21v-6.9Z"/></symbol>
+</svg>
+
+<!-- ============================= HEADER ============================= -->
+<header class="site-header">
+  <div class="flagline" aria-hidden="true"></div>
+  <div class="wrap header-inner">
+    <a class="brand" href="#/">
+      <span class="ribbon" aria-hidden="true"><i></i><i></i><i></i></span>
+      <span class="brand-text">
+        <span class="brand-name">Veterans Landing</span>
+        <span class="brand-sub">A Veteran Owned Community</span>
+      </span>
+    </a>
+
+    <nav class="nav" id="nav" aria-label="Primary"></nav>
+
+    <a class="btn btn-solid btn-sm header-cta" href="#contact">Contact</a>
+
+    <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="nav">
+      <span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span>
+      <span class="sr">Menu</span>
+    </button>
+  </div>
+</header>
+
+<main id="main">
+  <div id="view"></div>
+
+  <noscript>
+    <div class="section"><div class="wrap">
+      <h1>Veterans Landing</h1>
+      <p>A veteran-owned housing community in Detroit, with two properties: Veterans Landing Joy Road and Veterans Landing Iris Manor. Safe, stable, affordable apartments with an on-site veterans resource center, employment training, and career support.</p>
+      <p>Please enable JavaScript to browse the full site, or contact our leasing office directly using the details below.</p>
+    </div></div>
+  </noscript>
+
+  <!-- ============================= CONTACT ============================= -->
+  <section class="section section-tint" id="contact">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow"><span class="ribbon sm" aria-hidden="true"><i></i><i></i><i></i></span> Get in touch</p>
+        <h2>Come see it for yourself</h2>
+        <p class="sec-lede">Tell us a little about what you need and our team will follow up. Veterans and their families are always welcome to stop by during office hours.</p>
+      </div>
+
+      <div class="contact-layout">
+        <div class="contact-details">
+          <ul class="contact-list">
+            <li><span class="c-ico"><svg aria-hidden="true"><use href="#i-pin"></use></svg></span>
+              <div><b>Leasing office</b><span data-cfg="general.officeAddress">12850 W Chicago, Detroit, MI 48228</span></div></li>
+            <li><span class="c-ico"><svg aria-hidden="true"><use href="#i-phone"></use></svg></span>
+              <div><b>Phone</b><a data-cfg="general.phone" data-cfg-href="tel" href="#">(000) 000-0000</a></div></li>
+            <li><span class="c-ico"><svg aria-hidden="true"><use href="#i-mail"></use></svg></span>
+              <div><b>Email</b><a data-cfg="general.email" data-cfg-href="mailto" href="#">info@example.org</a></div></li>
+            <li><span class="c-ico"><svg aria-hidden="true"><use href="#i-globe"></use></svg></span>
+              <div><b>Website</b><a data-cfg="general.website" data-cfg-href="url" href="#">www.example.org</a></div></li>
+            <li><span class="c-ico"><svg aria-hidden="true"><use href="#i-clock"></use></svg></span>
+              <div><b>Office hours</b><span data-cfg="general.hours">Monday – Friday, 9:00 AM – 5:00 PM</span></div></li>
+          </ul>
+
+          <div class="social">
+            <p class="micro-label">Follow us</p>
+            <div class="social-row">
+              <a class="social-btn" data-cfg-href="facebook" href="#" aria-label="Facebook"><svg aria-hidden="true"><use href="#i-fb"></use></svg></a>
+              <a class="social-btn" data-cfg-href="instagram" href="#" aria-label="Instagram"><svg aria-hidden="true"><use href="#i-ig"></use></svg></a>
+              <a class="social-btn" data-cfg-href="linkedin" href="#" aria-label="LinkedIn"><svg aria-hidden="true"><use href="#i-li"></use></svg></a>
+            </div>
+          </div>
+        </div>
+
+        <form class="inquiry card" id="inquiryForm" novalidate>
+          <h3 class="inquiry-title">Request information</h3>
+          <div class="field">
+            <label for="f-name">Full name</label>
+            <input id="f-name" name="name" type="text" autocomplete="name" required>
+          </div>
+          <div class="field-row">
+            <div class="field"><label for="f-email">Email</label>
+              <input id="f-email" name="email" type="email" autocomplete="email" required></div>
+            <div class="field"><label for="f-phone">Phone</label>
+              <input id="f-phone" name="phone" type="tel" autocomplete="tel"></div>
+          </div>
+          <div class="field-row">
+            <div class="field"><label for="f-property">Community</label>
+              <select id="f-property" name="property"></select></div>
+            <div class="field"><label for="f-unit">Apartment type</label>
+              <select id="f-unit" name="unit">
+                <option>Efficiency</option>
+                <option selected>1 Bedroom</option>
+                <option>2 Bedroom</option>
+              </select></div>
+          </div>
+          <div class="field">
+            <label for="f-msg">How can we help?</label>
+            <textarea id="f-msg" name="message" rows="4"></textarea>
+          </div>
+          <button class="btn btn-solid btn-block" type="submit">Send inquiry</button>
+          <p class="form-note" id="formNote">We typically respond within one business day.</p>
+        </form>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ============================= FOOTER ============================= -->
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <div class="footer-brand">
+      <span class="ribbon light" aria-hidden="true"><i></i><i></i><i></i></span>
+      <p class="footer-name">Veterans Landing</p>
+      <p class="footer-tag">Honor <span aria-hidden="true">★</span> Home <span aria-hidden="true">★</span> Community</p>
+    </div>
+    <nav class="footer-nav" id="footerNav" aria-label="Footer"></nav>
+    <div class="footer-legal">
+      <p><span data-cfg="general.officeAddress">12850 W Chicago, Detroit, MI 48228</span><br>
+      <a data-cfg="general.phone" data-cfg-href="tel" href="#">(000) 000-0000</a></p>
+      <p class="fine">&copy; <span id="year">2026</span> Veterans Landing. All rights reserved.<br>
+      Equal Housing Opportunity. We do not discriminate on the basis of race, color, religion, sex, disability, familial status, or national origin.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/js/config.js"></script>
+<script src="assets/js/properties.js"></script>
+<script src="assets/js/site.js"></script>
+</body>
+</html>
