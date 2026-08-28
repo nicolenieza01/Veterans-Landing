@@ -217,7 +217,7 @@
           '<h1 class="display-xl">' + headline + "</h1>" +
           '<p class="lede">' + (HOME.lede || "") + "</p>" +
           '<div class="actions">' +
-            '<a class="btn btn-solid" href="#contact">Talk to our team</a>' +
+            '<a class="btn btn-solid" href="#apply">Apply now</a>' +
             '<a class="btn btn-quiet" href="#communities">See the communities</a>' +
           "</div>" +
         "</div>" +
@@ -290,7 +290,7 @@
           '<p class="lede">' + p.tagline + "</p>" +
           '<p class="hero-addr">' + icon("pin") + " " + maybeTodo(p.address) + "</p>" +
           '<div class="actions">' +
-            '<a class="btn btn-solid" href="#contact">Check availability</a>' +
+            '<a class="btn btn-solid" href="#apply">Apply now</a>' +
             '<a class="btn btn-quiet" href="#floorplans">View floor plans</a>' +
           "</div>" +
         "</div>" +
@@ -336,17 +336,20 @@
     var html = items.map(function (i) {
       return '<a class="nav-link" data-slug="' + i.slug + '" href="' + i.href + '">' + i.label + "</a>";
     }).join("");
-    document.getElementById("nav").innerHTML =
-      html + '<a class="nav-link nav-contact" href="#contact">Contact</a>';
-    document.getElementById("footerNav").innerHTML =
-      html + '<a class="nav-link" href="#contact">Contact</a>';
+    document.getElementById("nav").innerHTML = html +
+      '<a class="nav-link" href="#contact">Contact</a>' +
+      '<a class="nav-link nav-apply" href="#apply">Apply now</a>';
+    document.getElementById("footerNav").innerHTML = html +
+      '<a class="nav-link" href="#apply">Apply</a>' +
+      '<a class="nav-link" href="#contact">Contact</a>';
 
-    var sel = document.getElementById("f-property");
-    if (sel) {
-      sel.innerHTML = PROPS.map(function (p) {
-        return '<option value="Veterans Landing ' + p.name + '">Veterans Landing ' + p.name + "</option>";
-      }).join("") + '<option value="Either / not sure">Not sure yet</option>';
-    }
+    var opts = PROPS.map(function (p) {
+      return '<option value="Veterans Landing ' + p.name + '">Veterans Landing ' + p.name + "</option>";
+    }).join("") + '<option value="Either / not sure">Not sure yet</option>';
+    ["f-property", "a-property"].forEach(function (id) {
+      var sel = document.getElementById(id);
+      if (sel) sel.innerHTML = opts;
+    });
   }
 
   function markNav(slug) {
@@ -438,57 +441,127 @@
   window.addEventListener("hashchange", function () { route(true); });
   route(false);
 
-  /* --------------------------------------------------------------- form */
-  var form = document.getElementById("inquiryForm");
-  var note = document.getElementById("formNote");
-  function setNote(msg, cls) {
-    if (!note) return;
-    note.textContent = msg;
-    note.className = "form-note" + (cls ? " " + cls : "");
+  /* --------------------------------------------------------------- forms
+     Both forms share one handler. How they send is set by form.mode in
+     assets/js/config.js:
+       "netlify"  posts to Netlify Forms (saved on the site and emailed to you)
+       "endpoint" posts to a form service such as Formspree
+       "mailto"   opens the visitor's own email app, pre-filled
+     If a netlify or endpoint post fails, it falls back to mailto rather than
+     losing what the visitor typed.
+     ------------------------------------------------------------------- */
+  var LABELS = {
+    name: "Name", email: "Email", phone: "Phone", property: "Community",
+    unit: "Apartment type", movein: "Hoping to move in", household: "People in the home",
+    service: "Service connection", income: "Monthly household income",
+    assistance: "Voucher or VA assistance", consent: "Consented", message: "Notes"
+  };
+
+  function setNote(el, msg, cls) {
+    if (!el) return;
+    el.textContent = msg;
+    el.className = "form-note" + (cls ? " " + cls : "");
   }
 
-  if (form) {
+  function asText(data) {
+    return Object.keys(data)
+      .filter(function (k) { return k !== "form-name" && k !== "bot-field" && data[k] !== ""; })
+      .map(function (k) { return (LABELS[k] || k) + ": " + data[k]; })
+      .join("\n");
+  }
+
+  function openMailto(data, subject, note, why, toPath) {
+    var to = clean(cfg(toPath || "general.email") || cfg("general.email") || "");
+    window.location.href = "mailto:" + to +
+      "?subject=" + encodeURIComponent(subject) +
+      "&body=" + encodeURIComponent(asText(data));
+    setNote(note, why || "Your email app should open with everything filled in. Press send and we will have it.", "ok");
+  }
+
+  function wireForm(formId, noteId, subject, success, toPath) {
+    var form = document.getElementById(formId);
+    var note = document.getElementById(noteId);
+    if (!form) return;
+
     form.addEventListener("submit", function (e) {
       e.preventDefault();
+
       if (!form.checkValidity()) {
         form.reportValidity();
-        setNote("Please add your name and a valid email address.", "err");
+        setNote(note, "Please fill in the fields marked required.", "err");
         return;
       }
-      var data = {};
-      new FormData(form).forEach(function (v, k) { data[k] = v; });
 
-      var mode = cfg("form.mode") || "mailto";
+      var fd = new FormData(form);
+      var data = {};
+      fd.forEach(function (v, k) { data[k] = v; });
+      if (data["bot-field"]) return; // silently drop bots
+
+      var mode = cfg("form.mode") || "netlify";
       var endpoint = cfg("form.endpoint") || "";
 
-      if (mode === "endpoint" && endpoint && endpoint.indexOf("YOUR_FORM_ID") === -1) {
-        setNote("Sending…");
-        fetch(endpoint, { method: "POST", headers: { Accept: "application/json" }, body: new FormData(form) })
+      if (location.protocol === "file:") { openMailto(data, subject, note, null, toPath); return; }
+
+      if (mode === "netlify") {
+        setNote(note, "Sending…");
+        fetch("/", {
+          method: "POST",
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
+          body: new URLSearchParams(fd).toString()
+        })
           .then(function (r) {
-            if (!r.ok) throw new Error("bad response");
+            if (!r.ok) throw new Error("rejected");
             form.reset();
-            setNote("Thank you. Your inquiry has been sent and we will be in touch shortly.", "ok");
+            setNote(note, success, "ok");
           })
           .catch(function () {
-            setNote("Something went wrong. Please call or email us directly.", "err");
+            openMailto(data, subject, note,
+              "We could not send it from here, so your email app should be opening with your answers filled in. Press send, or call the leasing office and we will take it over the phone. Nothing you typed has been lost.",
+              toPath);
           });
         return;
       }
 
-      var to = clean(cfg("general.email") || "");
-      var body = [
-        "Name: " + (data.name || ""),
-        "Email: " + (data.email || ""),
-        "Phone: " + (data.phone || ""),
-        "Community: " + (data.property || ""),
-        "Apartment type: " + (data.unit || ""),
-        "", data.message || ""
-      ].join("\n");
+      if (mode === "endpoint" && endpoint && endpoint.indexOf("YOUR_FORM_ID") === -1) {
+        setNote(note, "Sending…");
+        fetch(endpoint, { method: "POST", headers: { Accept: "application/json" }, body: fd })
+          .then(function (r) {
+            if (!r.ok) throw new Error("rejected");
+            form.reset();
+            setNote(note, success, "ok");
+          })
+          .catch(function () { openMailto(data, subject, note, null, toPath); });
+        return;
+      }
 
-      window.location.href = "mailto:" + to +
-        "?subject=" + encodeURIComponent("Housing inquiry: " + (data.property || "Veterans Landing")) +
-        "&body=" + encodeURIComponent(body);
-      setNote("Your email app should open with the message ready to send.", "ok");
+      openMailto(data, subject, note, null, toPath);
+    });
+  }
+
+  wireForm("inquiryForm", "formNote", "Website inquiry",
+    "Thank you. Your message is in and we will be in touch shortly.");
+  wireForm("applicationForm", "applyNote", "Veterans Landing rental application",
+    "Thank you. Your application is in. We confirm receipt within one business day.",
+    "applications.email");
+
+  /* --------------------------------------------- reveal the application */
+  var applyToggle = document.getElementById("applyToggle");
+  var applyForm = document.getElementById("applicationForm");
+  if (applyToggle && applyForm) {
+    applyToggle.addEventListener("click", function () {
+      var open = applyForm.hasAttribute("hidden");
+      if (open) {
+        applyForm.removeAttribute("hidden");
+        applyToggle.setAttribute("aria-expanded", "true");
+        applyToggle.textContent = "Hide the application";
+        applyForm.scrollIntoView({ behavior: "smooth", block: "start" });
+        var first = applyForm.querySelector("input, select, textarea");
+        if (first) setTimeout(function () { first.focus({ preventScroll: true }); }, 400);
+      } else {
+        applyForm.setAttribute("hidden", "");
+        applyToggle.setAttribute("aria-expanded", "false");
+        applyToggle.textContent = "Start the online application";
+      }
     });
   }
 })();
