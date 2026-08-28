@@ -1,0 +1,9 @@
+# Netlify settings for the Veterans Landing site.
+# Nothing here needs changing for the site to work.
+
+[build]
+  publish = "."
+
+[functions]
+  directory = "netlify/functions"
+  node_bundler = "esbuild"
