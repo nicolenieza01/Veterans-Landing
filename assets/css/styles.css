@@ -568,6 +568,12 @@ body.nav-open .nav-toggle span[aria-hidden]:nth-child(3){transform:translateY(-6
 .ready-list li::before{
   content:"\2605";position:absolute;left:0;top:0;color:var(--gold);font-size:.72rem;line-height:1.85;
 }
+.policy-note{
+  margin:0 0 22px;padding:13px 16px;border-radius:var(--r-sm);
+  background:var(--tint);border-left:3px solid var(--gold);
+  font-size:.88rem;line-height:1.6;color:var(--ink);
+}
+.policy-note b{color:var(--navy)}
 .launch-foot{margin-top:18px;font-size:.82rem;color:var(--ink-mute)}
 
 .app-form{margin-top:38px;padding:clamp(22px,3vw,38px)}
