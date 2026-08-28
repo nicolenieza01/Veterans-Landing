@@ -57,28 +57,75 @@ fill in `count` in `assets/js/properties.js`.
 
 ---
 
-## 3. The inquiry form
+## 3. The rental application
 
-Out of the box it runs in **mailto mode**: the visitor hits "Send inquiry" and
-their email app opens with everything filled in and addressed to you. Works
-anywhere with zero setup, but they have to press Send themselves.
+Your Word application is now an online form: all ten sections, revealed when someone
+clicks "Start the application" in the Apply section. Online is the only way to apply,
+so every submission arrives the same way and nothing gets lost on paper.
 
-To have inquiries land in your inbox automatically:
+To change a question, edit it in `index.html` inside the `<form id="applicationForm">`
+block. Sections are numbered the same way as your Word document, so section 4 in the
+file is section 4 in the original.
 
-1. Sign up free at [formspree.io](https://formspree.io) and create a form.
-2. Copy the URL it gives you (like `https://formspree.io/f/abcdwxyz`).
-3. In `assets/js/config.js`:
+### Getting applications by email
 
-```js
-form: {
-  mode: "endpoint",
-  endpoint: "https://formspree.io/f/abcdwxyz"
-}
-```
+Form handling comes free with Netlify, but you have to switch the notification on once:
+
+1. Deploy the site to Netlify.
+2. Submit a test application yourself so Netlify registers the form.
+3. In Netlify: **Site configuration → Forms → Form notifications → Add notification
+   → Email notification**.
+4. Send it to **diaz.victor.d@gmail.com**. Repeat for both forms, `application`
+   and `inquiry`.
+
+Every submission is also stored in Netlify under **Forms**, so nothing is lost even
+if an email goes astray. The free tier covers 100 submissions a month.
+
+**If you host anywhere other than Netlify** (GitHub Pages, GoDaddy, and so on) this
+does not work, because those hosts only serve files and cannot receive a form. Open
+`assets/js/config.js` and set `mode: "mailto"` instead. The application will then
+open the applicant's own email app with their answers filled in, addressed to you.
+
+### Getting a text when an application arrives
+
+`netlify/functions/submission-created.js` sends a short text to 517-290-8083 the
+moment an application comes in. It says who applied and their callback number, and
+deliberately leaves the personal details out of the message. Those stay in the
+email. It does nothing until you give it credentials:
+
+1. Create an account at [twilio.com](https://twilio.com) and buy a phone number.
+   Budget about $1.15 a month for the number and under a cent per text.
+2. In Netlify: **Site configuration → Environment variables**, add four:
+
+   | Name | Value |
+   |---|---|
+   | `TWILIO_ACCOUNT_SID` | from your Twilio console |
+   | `TWILIO_AUTH_TOKEN` | from your Twilio console |
+   | `TWILIO_FROM` | your Twilio number, like `+13135550147` |
+   | `ALERT_TO` | `+15172908083` |
+
+3. Redeploy the site, then send yourself a test application.
+
+Two cheaper alternatives if you would rather skip Twilio: connect the Netlify form
+to Zapier or Make and let them send the text, or add a second Netlify email
+notification pointed at your carrier's email-to-text gateway. The gateway trick is
+free but depends on your carrier and is not guaranteed to arrive.
+
+### A word about what you are collecting
+
+The application asks for date of birth, the last four of an ID, income, and rental
+history. It does not ask for a Social Security number or any medical information,
+which keeps it much safer to run online. Treat the Netlify dashboard and the
+receiving inbox as confidential records, and note your own document's closing line:
+have Michigan housing counsel review the application before you rely on it
+operationally.
 
 ---
 
-## 4. Swapping the building photos
+## 4. The inquiry form and photos
+
+The short "Request information" form in the Contact section works the same way as
+the application: Netlify catches it, or it falls back to the visitor's email app.
 
 The two hero photos were cropped out of your brochures, so they're fairly low
 resolution — replacing them is the single biggest visual upgrade available.
@@ -127,8 +174,11 @@ veterans-landing/
     ├── css/styles.css      all styling; design tokens at the top
     ├── js/properties.js    >>> the communities + home page copy <<<
     ├── js/config.js        >>> contact details, social, form settings <<<
-    ├── js/site.js          renders the pages, handles the form
+    ├── js/site.js          renders the pages, handles both forms
     └── img/                building photos, brochure logos, favicon
+netlify.toml                Netlify settings, nothing to change
+netlify/functions/
+    submission-created.js   sends the text alert (see section 3)
 ```
 
 ### Changing colors
