@@ -12,7 +12,7 @@ window.SITE_CONFIG = {
   general: {
     // Main leasing/office contact — shown in the header, contact block, footer.
     phone:         "(517)290-8083 ",
-    email:         "veteranslanding2026@gmail.com",
+    email:         "diaz.victor.d@gmail.com harshnarayankar6@gmail.com nicole.niezabytowski@gmail.com",
     website:       "https://veteranslanding.netlify.app/",
     officeAddress: "12850 W Chicago, Detroit, MI 48228",
     hours:         "Monday to Friday, 9:00 AM to 5:00 PM"
